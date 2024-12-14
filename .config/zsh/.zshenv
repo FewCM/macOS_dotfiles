@@ -44,3 +44,4 @@ export BAT_PAGER='less -R -F -+X --mouse'
 # export DOTBARE_PREVIEW="cat -n {}"
 # export DOTBARE_DIFF_PAGER="delta --diff-so-fancy --line-numbers"
 # # }}}
+export PATH="$(brew --prefix python)/libexec/bin:$PATH"

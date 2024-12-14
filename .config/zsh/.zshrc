@@ -142,14 +142,14 @@ function eval_homebrew() {
     fi
 }
 
-function add_python_path() {
-    if command -v python &>/dev/null; then
-        export PATH="$(brew --prefix python)/libexec/bin:$PATH"
-    fi
-}
+# function add_python_path() {
+#     if command -v python &>/dev/null; then
+#         export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+#     fi
+# }
 
-eval_homebrew
-add_python_path
+# eval_homebrew
+# add_python_path
 
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 # export PATH="$(brew --prefix python)/libexec/bin:$PATH"
