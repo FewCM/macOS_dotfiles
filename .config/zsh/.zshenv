@@ -44,4 +44,15 @@ export BAT_PAGER='less -R -F -+X --mouse'
 # export DOTBARE_PREVIEW="cat -n {}"
 # export DOTBARE_DIFF_PAGER="delta --diff-so-fancy --line-numbers"
 # # }}}
+
+# # Homebrew & Python path setup
+# eval_homebrew() {
+#     if command -v brew &>/dev/null; then
+#         eval "$(/opt/homebrew/bin/brew shellenv)"
+#         FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+#     fi
+# }
+# eval_homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 export PATH="$(brew --prefix python)/libexec/bin:$PATH"

@@ -135,12 +135,12 @@ zinit load starship/starship
 print "[zshrc] ZSH took ${(M)$(( SECONDS * 1000 ))#*.?} ms"
 
 # Homebrew & Python path setup
-function eval_homebrew() {
-    if command -v brew &>/dev/null; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-    fi
-}
+# function eval_homebrew() {
+#     if command -v brew &>/dev/null; then
+#         eval "$(/opt/homebrew/bin/brew shellenv)"
+#         FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+#     fi
+# }
 
 # function add_python_path() {
 #     if command -v python &>/dev/null; then
