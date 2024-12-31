@@ -52,7 +52,20 @@ export BAT_PAGER='less -R -F -+X --mouse'
 #         FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 #     fi
 # }
-# eval_homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+# #via:
+# # Profiling via:
+# # https://kev.inburke.com/kevin/profiling-zsh-startup-time/
+# : "${PROFILE_STARTUP:=false}"
+# : "${PROFILE_ALL:=false}"
+# # Run this to get a profile trace and exit: ç zsh -i -c echo
+# # Or: time PROFILE_STARTUP=true /bin/zsh -i --login -c echo
+# if [[ "$PROFILE_STARTUP" == true || "$PROFILE_ALL" == true ]]; then
+#     # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+#     PS4=$'%D{%H:%M:%S.%.} %N:%i> '
+#     #zmodload zsh/datetime
+#     #PS4='+$EPOCHREALTIME %N:%i> '
+#     exec 3>&2 2>/tmp/zsh_profile.$$
+#     setopt xtrace prompt_subst
+# fi
+# # "unsetopt xtrace" is at the end of ~/.zshrc
+

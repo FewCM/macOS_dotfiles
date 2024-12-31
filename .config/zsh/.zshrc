@@ -25,13 +25,13 @@ zinit light-mode for \
     NICHOLAS85/z-a-linkman \
     NICHOLAS85/z-a-linkbin
 
-typeset -F4 SECONDS=0
+#typeset -F4 SECONDS=0
 
 # Core plugins and binaries (with delay loading)
-zinit ice wait lucid multisrc "alias.zsh zopts.zsh"
-zinit light $ZDOTDIR/zlib
+#zinit ice wait lucid multisrc "alias.zsh zopts.zsh"
+#zinit light $ZDOTDIR/zlib
 
-source $ZDOTDIR/zlib/functions.zsh
+
 
 # Delta and fd binaries with delayed loading (from GitHub releases)
 zinit ice from"gh-r" as"command" \
@@ -60,8 +60,8 @@ zinit ice wait'0a' blockf lucid atpull'zinit creinstall -q .'
 zinit light zsh-users/zsh-completions
 
 # Diff-so-fancy plugin (delayed loading)
-zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
-zinit load zdharma-continuum/zsh-diff-so-fancy
+# zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
+# zinit load zdharma-continuum/zsh-diff-so-fancy
 
 # FZF binary and keybindings
 zinit ice from"gh-r" as"command" \
@@ -100,28 +100,28 @@ zinit light zsh-users/zsh-history-substring-search
 #     ZSH_AUTOSUGGEST_COMPLETION_IGNORE="[[:space:]]*"
 # }
 # zinit ice wait'0a' atload'!_zsh_autosuggest_start; _zsh_autosuggest_setting' lucid
-zinit light zsh-users/zsh-autosuggestions
+# zinit light zsh-users/zsh-autosuggestions
 
 zinit ice wait'0a' lucid
 zinit light zsh-users/zsh-autosuggestions
 
 # Per-directory history settings
-_per-directory-history-settings() {
-    export PER_DIRECTORY_HISTORY_BASE=$ZDOTDIR/.zsh_history_dirs
-}
-zinit wait'2' lucid atinit"export HISTORY_START_WITH_GLOBAL=true ; _per-directory-history-settings" atload"_per-directory-history-set-global-history" light-mode for @CyberShadow/per-directory-history
+# _per-directory-history-settings() {
+#     export PER_DIRECTORY_HISTORY_BASE=$ZDOTDIR/.zsh_history_dirs
+# }
+# zinit wait'2' lucid atinit"export HISTORY_START_WITH_GLOBAL=true ; _per-directory-history-settings" atload"_per-directory-history-set-global-history" light-mode for @CyberShadow/per-directory-history
 
 # FZF tab completion
-zinit ice wait"1" lucid has"fzf" atload"
-    zstyle ':completion:*' verbose yes
-    zstyle ':completion:*' list-colors \${(s.:.)LS_COLORS}
-    zstyle ':completion:*:descriptions' format '[%d]'
-    zstyle ':completion::complete:*:*:files' ignored-patterns '.DS_Store' 'Icon?' '.Trash'
-    zstyle ':completion::complete:rm:*:globbed-files' ignored-patterns
-    zstyle ':fzf-tab:*' fzf-command fzf
-    zstyle ':fzf-tab:*' fzf-flags '--ansi'
-"
-zinit light Aloxaf/fzf-tab
+# zinit ice wait"1" lucid has"fzf" atload"
+#     zstyle ':completion:*' verbose yes
+#     zstyle ':completion:*' list-colors \${(s.:.)LS_COLORS}
+#     zstyle ':completion:*:descriptions' format '[%d]'
+#     zstyle ':completion::complete:*:*:files' ignored-patterns '.DS_Store' 'Icon?' '.Trash'
+#     zstyle ':completion::complete:rm:*:globbed-files' ignored-patterns
+#     zstyle ':fzf-tab:*' fzf-command fzf
+#     zstyle ':fzf-tab:*' fzf-flags '--ansi'
+# "
+# zinit light Aloxaf/fzf-tab
 
 # Syntax highlighting (with Zinit loading)
 zinit ice depth'1' lucid wait'0'  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"
@@ -132,7 +132,7 @@ zinit ice from"gh-r" as"command" atload'eval "$(starship init zsh)" > /dev/null 
 zinit load starship/starship
 
 # Final timing report
-print "[zshrc] ZSH took ${(M)$(( SECONDS * 1000 ))#*.?} ms"
+# print "[zshrc] ZSH took ${(M)$(( SECONDS * 1000 ))#*.?} ms"
 
 # Homebrew & Python path setup
 # function eval_homebrew() {
@@ -153,3 +153,19 @@ print "[zshrc] ZSH took ${(M)$(( SECONDS * 1000 ))#*.?} ms"
 
 # eval "$(/opt/homebrew/bin/brew shellenv)"
 # export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+
+# eval_homebrew
+#eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+
+export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+
+source $ZDOTDIR/zlib/functions.zsh
+source $ZDOTDIR/zlib/alias.zsh
+source $ZDOTDIR/zlib/zopts.zsh

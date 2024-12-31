@@ -1,27 +1,33 @@
 tap "homebrew/bundle"
 tap "th-ch/youtube-music"
 brew "bat"
+brew "python@3.13"
 brew "eza"
+brew "ffmpeg"
 brew "gh"
 brew "hexyl"
+brew "htop"
 brew "mas"
 brew "ncdu"
 brew "neofetch"
 brew "odt2txt"
-brew "python@3.13"
 brew "tree"
+brew "yt-dlp"
 cask "adobe-acrobat-reader"
+cask "alacritty"
 cask "alt-tab"
 cask "elmedia-player"
 cask "font-iosevka-term-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
+cask "ghostty"
 cask "google-chrome"
-cask "jdownloader"
 cask "kitty"
 cask "pearcleaner"
 cask "sanesidebuttons"
 cask "visual-studio-code"
 cask "youtube-music"
-mas "Auto HD FPS for YouTube", id: 1546729687
+mas "Fig Player", id: 1612400976
+mas "Microsoft Outlook", id: 985367838
 mas "OneDrive", id: 823766827
+mas "PDFgear", id: 6469021132
 mas "PiPifier", id: 1160374471
