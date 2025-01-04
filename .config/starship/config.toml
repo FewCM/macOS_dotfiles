@@ -1,0 +1,233 @@
+# Warning: This config does not include keys that have an unset value
+
+# $all is shorthand for $username$hostname$shlvl$singularity$kubernetes$directory$vcsh$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$docker_context$package$cmake$cobol$dart$deno$dotnet$elixir$elm$erlang$golang$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig$nix_shell$conda$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$line_break$jobs$battery$time$status$shell$character
+# $custom (excluding any modules already listed in `format`) is shorthand for ${custom.os-icon}${custom.trim_directory_4}${custom.trim_directory_5}${custom.git_host}
+format = '''
+$username$directory$shell${custom.git_host}$git_branch$git_commit$git_status$git_state$fill$cmd_duration$status$time$line_break$character
+'''
+#format = '''
+#$username${username.fewcm}${username.root}$directory${custom.git_host}$git_branch$git_commit$git_status$git_state$fill$cmd_duration$status$time$line_break$character
+#'''
+right_format = ''
+scan_timeout = 30
+command_timeout = 500
+add_newline = true
+
+[character]
+success_symbol = "[λ](bold green)"
+error_symbol = "[λ](bold red)"
+vicmd_symbol = "[λ](bold yellow)"
+
+[cmd_duration]
+min_time = 2000
+format = 'took [$duration]($style) '
+style = 'yellow bold'
+show_milliseconds = false
+disabled = false
+show_notifications = false
+min_time_to_notify = 45000
+
+[directory]
+truncation_length = 9
+truncate_to_repo = true
+fish_style_pwd_dir_length = 0
+use_logical_path = true
+format = 'in [$path]($style)[$read_only]($read_only_style) '
+repo_root_format = '[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+style = 'bold cyan'
+disabled = false
+read_only = '  '
+read_only_style = 'bold red'
+truncation_symbol = '../'
+home_symbol = '~'
+
+[directory.substitutions]
+
+[env_var]
+
+[fill]
+style = 'bold green'
+symbol = ' '
+disabled = false
+
+[git_branch]
+format = ' on [$symbol$branch]($style) '
+symbol = ' '
+style = 'bold purple'
+truncation_length = 10
+truncation_symbol = ''
+only_attached = false
+always_show_remote = false
+disabled = false
+
+[git_commit]
+commit_hash_length = 4
+format = '[\($hash$tag\)]($style) '
+style = 'green bold'
+only_detached = true
+disabled = false
+tag_symbol = ' 🏷  '
+tag_disabled = true
+
+[git_metrics]
+added_style = 'bold green'
+deleted_style = 'bold red'
+only_nonzero_diffs = true
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+disabled = true
+
+[git_state]
+rebase = 'rebasing'
+merge = 'merging'
+revert = 'reverting'
+cherry_pick = ' picking'
+bisect = 'bisecting'
+am = '''am'ing'''
+am_or_rebase = 'am/rebase'
+style = 'bg:#E0B25D fg:111111'
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+disabled = false
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = 'red bold'
+stashed = '\$${count}'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+up_to_date = ''
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+conflicted = '=${count}'
+deleted = '✘${count}'
+renamed = '»${count}'
+modified = '!${count}'
+staged = '+${count}'
+untracked = '?${count}'
+disabled = false
+
+
+[jobs]
+threshold = 1
+symbol_threshold = 1
+number_threshold = 2
+format = '[$symbol$number]($style) '
+symbol = '✦'
+style = 'bold blue'
+disabled = false
+
+[line_break]
+disabled = false
+
+[rust]
+format = 'via [$symbol($version )]($style)'
+version_format = 'v${raw}'
+symbol = '🦀 '
+style = 'bold red'
+disabled = false
+detect_extensions = ['rs']
+detect_files = ['Cargo.toml']
+detect_folders = []
+
+[shell]
+bash_indicator = "[_](bold green)"
+zsh_indicator = "[](bold green)"
+disabled = false
+
+[status]
+format = '[$symbol$status]($style) '
+symbol = '✖'
+success_symbol = '✔️'
+not_executable_symbol = '🚫'
+not_found_symbol = '🔍'
+sigint_symbol = '🧱'
+signal_symbol = '⚡'
+style = 'bold red'
+map_symbol = false
+recognize_signal_code = true
+pipestatus = false
+pipestatus_separator = '|'
+pipestatus_format = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style)'
+disabled = true
+
+[time]
+format = 'at [ $time]($style) '
+style = 'bold yellow underline'
+use_12hr = true
+time_format = '%r'
+disabled = false
+utc_time_offset = 'local'
+time_range = '-'
+
+[username]
+format = '[ $user]($style) '
+style_root = 'red bold'
+style_user = 'yellow bold'
+show_always = false
+disabled = false
+
+[custom.trim_directory_5]
+format = '[$output](bold bright-green)'
+symbol = ''
+command = 'trim_dir.sh 3'
+when = '[[ $(rg -o "/" <<< "$(pwd)" | wc -l) -eq 5 ]]'
+shell = []
+description = '<custom config>'
+style = 'green bold'
+disabled = false
+files = []
+extensions = []
+directories = []
+
+[custom.git_host]
+format = 'at [$output]($style) '
+symbol = ''
+command = '''
+URL=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$URL" =~ "github" ]]; then
+    ICON="  "
+elif [[ "$URL" =~ "gitlab" ]]; then
+    ICON="  "
+elif [[ "$URL" =~ "bitbucket" ]];then
+    ICON="  "
+elif [[ "$URL" =~ "kernel" ]];then
+    ICON="  "
+elif [[ "$URL" =~ "archlinux" ]];then
+    ICON="  "
+elif [[ "$URL" =~ "gnu" ]];then
+    ICON="  "
+elif [[ "$URL" =~ "git" ]];then
+    ICON="  "
+else
+    ICON="  "
+    URL="localhost"
+fi
+for PATTERN in "https" "http" "git" "://" "@"; do
+    [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
+done
+for PATTERN in "/" ".git"; do
+    [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
+done
+printf "%s%s" "$ICON" "$URL"
+'''
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = [
+    'bash',
+    '--norc',
+    '--noprofile',
+]
+description = '<custom config>'
+style = 'bright-yellow bold'
+disabled = false
+files = []
+extensions = []
+directories = ['.git']
+
+# show os icon, thanks https://www.nerdfonts.com/cheat-sheet
+#                 
+[custom.os-icon]
+disabled = false
+command = "os-icon"
+style = "bold #7daea3"
+format = "[$symbol($output  )]($style)"
+symbol = ""
+when = "true"
+shell = ["bash", "--noprofile", "--norc"]

@@ -1,0 +1,9 @@
+.zsh_history_dirs/
+.zsh_sessions/
+.zcompcache/
+.zcompdump
+.zcompdump.zwc
+.zsh_history
+zsh.*
+.DS_Store
+*.bak
