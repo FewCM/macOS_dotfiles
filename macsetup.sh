@@ -97,6 +97,10 @@ function apply_macos_tweaks() {
     defaults write com.apple.LaunchServices LSQuarantine -bool false
     # Disable auto-correct
     defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+    # Show the ~/Library folder
+    chflags nohidden ~/Library
+    # Disable the 'Are you sure you want to open this application?' dialog"
+    defaults write com.apple.LaunchServices LSQuarantine -bool false
 
     # Restart affected apps
     echo -e "${YELLOW}Restarting affected apps...${NC}"
