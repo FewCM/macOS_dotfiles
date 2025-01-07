@@ -21,6 +21,30 @@ function apply_macos_tweaks() {
     # autohide-delay
     defaults write com.apple.dock autohide-delay -float 0
     defaults write com.apple.dock autohide-time-modifier -float 0
+    # Dock hot corners
+    # Possible values:
+    #  0: no-op
+    #  2: Mission Control
+    #  3: Show application windows
+    #  4: Desktop
+    #  5: Start screen saver
+    #  6: Disable screen saver
+    #  7: Dashboard
+    # 10: Put display to sleep
+    # 11: Launchpad
+    # 12: Notification Center
+    # 13: Lock Screen
+    # 14: Quick note
+    # Hot corners
+    # Top left screen corner → Desktop
+    defaults write com.apple.dock wvous-tl-corner -int 4
+    defaults write com.apple.dock wvous-tl-modifier -int 0
+    # Top right screen corner → Launchpad
+    defaults write com.apple.dock wvous-tr-corner -int 11
+    defaults write com.apple.dock wvous-tr-modifier -int 0
+    # Bottom left screen corner → Start screen saver
+    #defaults write com.apple.dock wvous-bl-corner -int 5
+    #defaults write com.apple.dock wvous-bl-modifier -int 0
 
 
     ###############################################################################
