@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-alias ~="cd ~"
+
 alias finder="open -a Finder ."
 
 #### EZA   ####

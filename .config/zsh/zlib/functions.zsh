@@ -14,7 +14,7 @@ system_update() {
     # Avoid annoying `(latest) != latest` cask updates:
     # shellcheck disable=SC2046
     brew upgrade $(brew outdated --greedy --verbose | awk '$2 !~ /(latest)/ {print $1}')
-    brew cleanup
+    brew cleanup --prune=all 
 
     # Ensure the Brew config directory and Brewfile exist
     if [ ! -d "$HOME/.config/Brew" ]; then
