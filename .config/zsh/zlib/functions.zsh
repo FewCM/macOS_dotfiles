@@ -29,6 +29,14 @@ system_update() {
     fi
     brew bundle dump --force --file "$HOME/.config/Brew/Brewfile"
 
+    # App Store
+    echo -e "${YELLOW}Checking for App Store updates...${NC}"
+    mas outdated
+
+     # macOS system
+     echo -e "${YELLOW}Checking for macOS system updates...${NC}"
+     softwareupdate --list
+
     # Zinit & plugins
     echo -e "${YELLOW}Updating zinit...${NC}"
     if ! zinit self-update || ! zinit update --all; then
