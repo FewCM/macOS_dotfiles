@@ -168,6 +168,28 @@ zinit ice wait"1" lucid \
   "
 zinit light Aloxaf/fzf-tab
 
+# fzf-tab previews
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -Tcl --group-directories-first --icons --git -L 2 --no-user $realpath'
+zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'bat --color=always --style=numbers --line-range=:500 $realpath'
+zstyle ':fzf-tab:complete:code:*' fzf-preview 'bat --color=always --style=numbers --line-range=:500 $realpath'
+
+
+
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview 'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview 'git show --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview 'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+    'case "$group" in
+    "commit tag") git show --color=always $word ;;
+    *) git show --color=always $word | delta ;;
+    esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+    'case "$group" in
+    "modified file") git diff $word | delta ;;
+    "recent commit object name") git show --color=always $word | delta ;;
+    *) git log --color=always $word ;;
+    esac'
+
 # Final timing report
 print "[zshrc] ZSH took ${(M)$(( SECONDS * 1000 ))#*.?} ms"
 
